@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="/Users/liyuanchao/.m2/repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<property name="javaFileEncoding" value="UTF-8" />
+  	
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+                    connectionURL="jdbc:mysql://localhost:3306/yiya"
+                    userId="root" password="" >
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="com.ylk.datamineservice.model" targetProject="/Users/liyuanchao/Documents/personal/workspace/datamineservice/src/main/java"/>
+    <sqlMapGenerator targetPackage="com.ylk.datamineservice.mapper" targetProject="/Users/liyuanchao/Documents/personal/workspace/datamineservice/src/main/java"/>
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.ylk.datamineservice.mapper"  targetProject="/Users/liyuanchao/Documents/personal/workspace/datamineservice/src/main/java"/>
+    <!-- <table schema="" tableName="tbl_cdz_info" domainObjectName="CdzInfo" />
+    <table schema="" tableName="tbl_card_info" domainObjectName="CardInfo" />
+    <table schema="" tableName="tbl_price_info" domainObjectName="PriceInfo" />
+    <table schema="" tableName="tbl_charge_log" domainObjectName="ChargeLog" />-->
+    <!-- <table schema="" tableName="ylk_card" domainObjectName="CardInfo" />
+    <table schema="" tableName="ylk_card_stream" domainObjectName="StreamInfo" />
+    <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" />
+    <table schema="" tableName="ylk_org" domainObjectName="AreaInfo" /> -->
+    <!-- <table schema="" tableName="ylk_charge_log" domainObjectName="ChargeLog" /> -->
+    <!-- <table schema="" tableName="ylk_card_stream" domainObjectName="StreamInfo" /> -->
+    <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" />
+  </context>
+</generatorConfiguration>
