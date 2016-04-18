@@ -11,6 +11,7 @@ public abstract class BaseEvent {
 	public BaseEvent(ReqBaseMsg baseMsg,ChannelHandlerContext handlerContext) {
 		this.baseMsg = baseMsg;
 		this.handlerContext = handlerContext;
+		
 	}
 	// 唯一确定消息的源地址
 	public String getMessageId() {
