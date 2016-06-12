@@ -13,7 +13,7 @@ public class PackCodecUtil {
 	
 	public static void encode(ResBaseFrame resFrame,ByteBuffer buf){
 		buf.put((byte)resFrame.getpHead());
-		buf.put((byte)resFrame.getPid());
+		buf.put((byte)resFrame.getGunType());
 		buf.put((byte)resFrame.getFrameType());
 		buf.put(resFrame.getDst());
 		buf.put((byte)0xF0);

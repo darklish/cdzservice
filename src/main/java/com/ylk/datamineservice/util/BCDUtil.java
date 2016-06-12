@@ -94,7 +94,7 @@ public class BCDUtil {
      */
     public static String bytesToHexString(byte[] src){  
         StringBuilder stringBuilder = new StringBuilder("");  
-        if (src == null || src.length <= 0) {  
+        if (src == null || src.length <= 0) {
             return null;  
         }  
         for (int i = 0; i < src.length; i++) {  

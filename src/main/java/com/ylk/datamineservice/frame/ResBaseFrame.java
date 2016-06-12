@@ -5,7 +5,7 @@ import java.net.InetSocketAddress;
 public class ResBaseFrame {
 	
 	protected int pHead = 0x88;
-	protected int pid = 0x10;
+	protected int gunType;
 	protected int  serverNo;
 	protected int moduleNo;
 	protected int deviceNo;
@@ -16,6 +16,7 @@ public class ResBaseFrame {
 	protected byte[] data = new byte[6];
 	protected InetSocketAddress remoteAddress;
 	public ResBaseFrame(BaseFrame baseFrame) {
+		this.gunType = baseFrame.gunType;
 		this.serverNo = baseFrame.serverNo;
 		this.moduleNo = baseFrame.moduleNo;
 		this.deviceNo = baseFrame.deviceNo;
@@ -31,12 +32,17 @@ public class ResBaseFrame {
 	public void setpHead(int pHead) {
 		this.pHead = pHead;
 	}
-	public int getPid() {
-		return pid;
+	
+	
+	
+	public int getGunType() {
+		return gunType;
 	}
-	public void setPid(int pid) {
-		this.pid = pid;
+
+	public void setGunType(int gunType) {
+		this.gunType = gunType;
 	}
+
 	public int getServerNo() {
 		return serverNo;
 	}

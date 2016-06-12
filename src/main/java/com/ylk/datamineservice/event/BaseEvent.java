@@ -15,7 +15,7 @@ public abstract class BaseEvent {
 	}
 	// 唯一确定消息的源地址
 	public String getMessageId() {
-		return baseMsg.getKey();
+		return baseMsg.getMsgKey();
 	}
 	public ReqBaseMsg getBaseMsg() {
 		return baseMsg;

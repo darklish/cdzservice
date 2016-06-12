@@ -153,7 +153,7 @@ public class MessageServiceImpl implements MessageService {
 		// 统一参数校验
 		boolean commonCheck = commonCheckMsg(bm);
 		if (!commonCheck) {
-			logger.info("未查询到充电桩信息,cdzNo:{}",bm.getCdzNo());
+			logger.warn("未查询到充电桩信息,cdzNo:{}",bm.getCdzNo());
 			return;
 		}
 		if (bm instanceof ReqICStateMsg) {
@@ -320,6 +320,10 @@ public class MessageServiceImpl implements MessageService {
 
 	public List<CdzInfo> selectAllDevice() {
 		return businessComService.listAllDevices();
+	}
+	
+	public boolean sysCommonConfigCheck() {
+		return businessComService.sysCommonConfigCheck();
 	}
 	
 

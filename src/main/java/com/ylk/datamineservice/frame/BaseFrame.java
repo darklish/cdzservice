@@ -7,7 +7,7 @@ import com.ylk.datamineservice.util.BCDUtil;
 
 public abstract class BaseFrame {
 	
-	protected int pid = 0x10;
+	protected int gunType;
 	
 	protected int frameType;
 	
@@ -130,11 +130,17 @@ public abstract class BaseFrame {
 	public int getPackNum() {
 		return packNum;
 	}
+	
+	
+
+	public int getGunType() {
+		return gunType;
+	}
 
 	public void superDecoder() {
 		if (this.srcBytes != null) {
 			byte pidb = srcBytes[0];
-			pid = BCDUtil.byteToHex(pidb);
+			gunType = BCDUtil.byteToHex(pidb);
 			byte ftb = srcBytes[1];
 			frameType = BCDUtil.byteToHex(ftb);
 			byte sn = srcBytes[2];
@@ -152,12 +158,16 @@ public abstract class BaseFrame {
 
 	public abstract BaseFrame decoder();
 	
-	public String getKey() {
-		return ""+frameType+moduleNo+deviceNo;
+	/**
+	 * 包标识增加枪号判断
+	 * @return
+	 */
+	public String getPackKey() {
+		return "" + gunType + frameType + moduleNo + deviceNo;
 	}
 	
 	public String toString() {
-		return "mk:"+moduleNo+",dev:"+deviceNo+",pid:"+pid+",ft:"+frameType+",fn:"+frameNo;
+		return "mk:"+moduleNo+",dev:"+deviceNo+",gunType:"+gunType+",ft:"+frameType+",fn:"+frameNo;
 	}
 	
 

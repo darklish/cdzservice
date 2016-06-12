@@ -25,11 +25,12 @@ public abstract class ReqBaseMsg extends BaseMsg {
 	public ReqBaseMsg(BaseFrame firstRecFrame) {
 		this.firstFrame = firstRecFrame;
 		addPackFrame(firstFrame);
+		this.gunType = firstRecFrame.getGunType();
 		this.packNum = firstRecFrame.getPackNum();
 		this.msgType = firstRecFrame.getFrameType();
 		this.moduleNo = firstRecFrame.getModuleNo();
 		this.deviceNo = firstRecFrame.getDeviceNo();
-		this.key = "" +msgType + moduleNo + deviceNo;
+		this.key = ""+ gunType + msgType + moduleNo + deviceNo;
 	}
 	
 	
@@ -40,7 +41,7 @@ public abstract class ReqBaseMsg extends BaseMsg {
 	public void setCompleteFlag(boolean completeFlag) {
 		this.completeFlag = completeFlag;
 	}
-	public String getKey() {
+	public String getMsgKey() {
 		return key;
 	}
 

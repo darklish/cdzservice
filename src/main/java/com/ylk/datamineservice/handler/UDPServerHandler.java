@@ -55,7 +55,7 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 	@Resource
 	private MessageServiceImpl messageService;
 	
-	ConcurrentMap<String,ReqMultiPackMsg> multiPackMap = new ConcurrentHashMap<String,ReqMultiPackMsg>();
+	ConcurrentMap<String,ReqMultiPackMsg> multiPackMap = new ConcurrentHashMap<String,ReqMultiPackMsg>();// 多包中间对象
 	
 	ConcurrentMap<String,DeviceKeepAliveTask> deviceMap = new ConcurrentHashMap<String,DeviceKeepAliveTask>();
 	
@@ -70,23 +70,32 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 	}
 	
 	public void dealAllCdz() {
-		logger.info("设备状态监控初始化开始!");
+		logger.info("启动时设备状态监控初始化开始!");
 		List<CdzInfo> cInfoLst = messageService.selectAllDevice();
 		if (cInfoLst != null) {
 			for (int i = 0; i < cInfoLst.size();i++) {
 				String cdzNo = cInfoLst.get(i).getCdzno();
-				
+				logger.info("充电桩{} : {}", i+1, cdzNo);
 				DeviceKeepAliveTask task = new DeviceKeepAliveTask(cdzNo);
 				timer.schedule(task, deviceOfflineTimeOut);
 				deviceMap.put(cdzNo, task);
 			}
 		}
-		logger.info("设备状态监控初始化完成!");
+		logger.info("启动时设备状态监控初始化完成!");
+		
+		logger.info("初始化检查系统基础配置开始");
+		
+		if (messageService.sysCommonConfigCheck()) {
+			logger.info("初始化检查系统基础配置成功");
+		} else {
+			logger.info("初始化检查系统基础配置失败");
+		}
+		
+		logger.info("初始化检查系统基础配置结束");
+		
 	}
 
-	public UDPServerHandler(HashedWheelTimer timer) {
-		//服务器定时发送广播信息，
-	}
+	
 	
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, BaseFrame out)
@@ -101,13 +110,12 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 		messageService.getEventbus().post(new CommonFrameEvent(cdzNo));
 		offLineLock.readLock().lock();
 		DeviceKeepAliveTask oldTask = deviceMap.get(cdzNo);
-		//System.out.println("元素个数:"+deviceMap.size());
+		
 		if (oldTask != null) {
 			oldTask.cancel();
 			DeviceKeepAliveTask task = new DeviceKeepAliveTask(cdzNo);
 			timer.schedule(task, deviceOfflineTimeOut);
 			deviceMap.put(cdzNo, task);
-			//oldTimer.timer.schedule(oldTimer.task, new Date(System.currentTimeMillis()+10000));
 		}
 		else {
 			DeviceKeepAliveTask task = new DeviceKeepAliveTask(cdzNo);
@@ -117,7 +125,7 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 		offLineLock.readLock().unlock();
 		//messageService.getEventbus().post(new SubPacEvent(msg,ctx));
 		if (out.isSubPac()) {
-			final String key = out.getKey();
+			final String key = out.getPackKey();
 			ResBaseFrame res1Msg = new ResBaseFrame(out);
 			ctx.writeAndFlush(res1Msg);
 			lock.readLock().lock();

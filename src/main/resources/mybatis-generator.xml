@@ -11,7 +11,7 @@
   	
     <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
                     connectionURL="jdbc:mysql://localhost:3306/yiya"
-                    userId="root" password="" >
+                    userId="root" password="root" >
     </jdbcConnection>
 
     <javaTypeResolver >
@@ -31,6 +31,7 @@
     <table schema="" tableName="ylk_org" domainObjectName="AreaInfo" /> -->
     <!-- <table schema="" tableName="ylk_charge_log" domainObjectName="ChargeLog" /> -->
     <!-- <table schema="" tableName="ylk_card_stream" domainObjectName="StreamInfo" /> -->
-    <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" />
+    <!-- <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" /> -->
+    <table schema="" tableName="tbl_charge_log" domainObjectName="ChargeLog" />
   </context>
 </generatorConfiguration>

@@ -1,5 +1,9 @@
 package com.ylk.datamineservice.frame;
 
+/**
+ * @author liyuanchao
+ * 广播帧
+ */
 public class BroadCastFrame {
 	protected int pHead = 0x88;
 	protected int pid = 0x10;

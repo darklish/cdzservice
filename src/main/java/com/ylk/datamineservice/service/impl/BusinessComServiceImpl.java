@@ -94,14 +94,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 			cardInfoService.updateCardInfo(cardInfo);
 			return retMsg;
 		}
-		
-		int result = msg.getChargeResult();// 充电结果,暂时不考虑,如果正在充电,是否无需处理,等充电完成后统一做处理
-		
-		//根据充电方式计算金额
-		int config = msg.getChargeConfig();// 无论充电配置如何,最终都已电度为准计算
-		int cardNo = msg.getCardNo();
-		float quantity = msg.getChargeQuantity();
-		float chargeTime = msg.getChargeTime();
+
 		
 		int qua = msg.getMeterQua() - startChargeLog.getBeginMeterQua();
 		// 根据单价信息，消耗电量信息，卡信息判断是否是有效
@@ -276,7 +269,6 @@ public class BusinessComServiceImpl implements BusinessComService {
 			return retMsg;
 		}
 		int oldFun = cardInfo.getMoney();
-		
 		
 		//判断错误结束码
 		if (msg.getEndCode() != ChargeUtil.END_CHARGE_CODE) {
@@ -623,7 +615,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 		String cdzNo = bm.getCdzNo();
 		List<CdzInfo> infoList = cdzInfoService.getCdzByNo(cdzNo);
 		if (infoList == null || infoList.size()==0 || infoList.size() > 1) {
-			logger.error("帧共同检测，查询充电桩数量错误:cdzno:{}", cdzNo);
+			logger.error("消息共同检测，查询充电桩数量0错误:cdzno:{}", cdzNo);
 			return false;
 		}
 		
@@ -639,6 +631,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 		return infoList;
 	}
 
+	
 	@Override
 	public void onLineDevicee(String cdzNo) {
 		List<CdzInfo> infoList = cdzInfoService.getCdzByNo(cdzNo);
@@ -654,6 +647,15 @@ public class BusinessComServiceImpl implements BusinessComService {
 			return;
 		}
 		cdzInfoService.updateCdzInfo(cInfo);
+	}
+
+	@Override
+	public boolean sysCommonConfigCheck() {
+		AreaInfo areaInfo = areaInfoService.getAndCHeckAreaInfo();
+		if (areaInfo == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

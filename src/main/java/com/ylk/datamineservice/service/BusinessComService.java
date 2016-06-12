@@ -51,4 +51,6 @@ public interface BusinessComService {
 
 	void onLineDevicee(String cdzNo);
 
+	boolean sysCommonConfigCheck();
+
 }

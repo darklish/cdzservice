@@ -26,9 +26,6 @@ public class PacketDecoder extends MessageToMessageCodec<DatagramPacket,ResBaseF
 	@Override
 	protected void encode(ChannelHandlerContext ctx, ResBaseFrame msg,
 			List<Object> out) throws Exception {
-		/*BroadCastFrame msg1 = new BroadCastFrame();
-		ByteBuffer buf = ByteBuffer.allocate(13);
-		PackCodecUtil.encode(msg1, buf);*/
 		ByteBuffer buf = ByteBuffer.allocate(13);
 		PackCodecUtil.encode(msg, buf);
 		out.add(new DatagramPacket(Unpooled.wrappedBuffer(buf), msg.getRemoteAddress()));
@@ -83,27 +80,6 @@ public class PacketDecoder extends MessageToMessageCodec<DatagramPacket,ResBaseF
 					break;
 				}
 			}
-			
-			/*if (headInt == ConstUtil.FH_VAL) {
-				List<Byte> byteLst = new ArrayList<Byte>();
-				byteLst.add(head[0]);
-				for (int j = i+1; j < barray.length;j++) {
-					byte[] temp = new byte[1];
-					temp[0] = barray[j];
-					//看首字节是否为88H
-					int tempHead = BCDUtil.bytesToHex(head);
-					if (tempHead == ConstUtil.FH_VAL) {
-						
-					}
-					else {
-						byteLst.add(temp[0]);
-					}
-				}
-			}
-			else {
-				continue; 
-			}*/
-			
 			
 		}
 		
