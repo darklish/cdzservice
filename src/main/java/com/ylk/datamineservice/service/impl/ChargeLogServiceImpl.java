@@ -30,10 +30,10 @@ public class ChargeLogServiceImpl implements ChargeLogService {
 	}
 
 	@Override
-	public ChargeLog getStartChargeByCdzAndCardNo(int cdzId, int cardNo) {
+	public ChargeLog getStartChargeByCdzAndCardNo(int cdzId, String gunType, int cardNo) {
 		ChargeLogExample ex = new ChargeLogExample();
 		ex.setOrderByClause("id desc");
-		ex.createCriteria().andStateEqualTo(0).andCdzIdEqualTo(cdzId).andCardNoEqualTo(cardNo);
+		ex.createCriteria().andStateEqualTo(0).andCdzIdEqualTo(cdzId).andCardNoEqualTo(cardNo).andGunTypeEqualTo(gunType);
 		List<ChargeLog> logs = chargeLogMapper.selectByExample(ex);
 		if (logs == null || logs.size() == 0 || logs.size() > 1) {
 			logger.warn("查询开始充电信息错误数据:cdzId:{},cardNo:{}",cdzId,cardNo);

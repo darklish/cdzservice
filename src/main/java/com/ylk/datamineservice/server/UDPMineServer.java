@@ -82,7 +82,7 @@ public class UDPMineServer {
         	logger.error("启动UDP Server失败",e);
         }
         uDPServerHandler.dealAllCdz();
-		timer.schedule(new ServerState(), 10000, keepaliveTimer);
+		//timer.schedule(new ServerState(), 10000, keepaliveTimer);
 	}
 	
 	public class ServerState extends TimerTask{

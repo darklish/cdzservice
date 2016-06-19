@@ -6,7 +6,7 @@ public interface ChargeLogService {
 
 	void saveLog(ChargeLog chargeLog);
 
-	ChargeLog getStartChargeByCdzAndCardNo(int deviceNo, int cardNo);
+	ChargeLog getStartChargeByCdzAndCardNo(int deviceNo, String gunType, int cardNo);
 
 	void updateChargeLogComplete(ChargeLog startChargeLog);
 

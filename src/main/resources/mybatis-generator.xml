@@ -32,6 +32,8 @@
     <!-- <table schema="" tableName="ylk_charge_log" domainObjectName="ChargeLog" /> -->
     <!-- <table schema="" tableName="ylk_card_stream" domainObjectName="StreamInfo" /> -->
     <!-- <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" /> -->
-    <table schema="" tableName="tbl_charge_log" domainObjectName="ChargeLog" />
+    <!-- <table schema="" tableName="ylk_card_stream" domainObjectName="StreamInfo" /> -->
+    <!-- <table schema="" tableName="ylk_cdz" domainObjectName="CdzInfo" /> -->
+    <table schema="" tableName="tbl_module" domainObjectName="ModuleInfo" />
   </context>
 </generatorConfiguration>

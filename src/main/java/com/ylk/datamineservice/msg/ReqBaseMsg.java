@@ -33,7 +33,13 @@ public abstract class ReqBaseMsg extends BaseMsg {
 		this.key = ""+ gunType + msgType + moduleNo + deviceNo;
 	}
 	
-	
+	public String getStrGunType() {
+		if (gunType == 0x05) {
+			return "A";
+		} else {
+			return "B";
+		}
+	}
 	public boolean isCompleteFlag() {
 		return completeFlag;
 	}
