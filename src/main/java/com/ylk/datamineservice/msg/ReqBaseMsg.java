@@ -34,7 +34,7 @@ public abstract class ReqBaseMsg extends BaseMsg {
 	}
 	
 	public String getStrGunType() {
-		if (gunType == 0x05) {
+		if (gunType == 0x0A) {
 			return "A";
 		} else {
 			return "B";

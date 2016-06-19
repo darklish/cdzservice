@@ -442,7 +442,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 				cardInfoService.updateCardInfo(cardInfo);
 				chargeLog.setCreateDate(new Date());
 				chargeLog.setBeginTime(new Date());
-				if (msg.getGunType() == 0x05) {
+				if (msg.getGunType() == 0x0A) {
 					chargeLog.setGunType("A");
 				} else {
 					chargeLog.setGunType("B");
@@ -570,7 +570,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 			info.setRunstate(CdzStateUtil.CDZ_OFFLINE);
 		}
 
-		if (msg.getGunType() == 0x05) {
+		if (msg.getGunType() == 0x0A) {
 			if (workState == CdzStateUtil.DEVICE_WORK_WAIT) {
 				info.setAgunstate(CdzStateUtil.CDZ_WORK_WAIT);
 			} else if (workState == CdzStateUtil.DEVICE_WORK_CONFIG) {

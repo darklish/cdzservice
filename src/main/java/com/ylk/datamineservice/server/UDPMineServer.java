@@ -53,7 +53,7 @@ public class UDPMineServer {
 	private Timer timer;
 	
 	
-	private int keepaliveTimer = 3000;//服务端定时发送心跳广播信息,毫秒
+	private int keepaliveTimer = 60000;//服务端定时发送心跳广播信息,毫秒
 	/**
 	 * 初始化TCPServer
 	 */
@@ -82,7 +82,7 @@ public class UDPMineServer {
         	logger.error("启动UDP Server失败",e);
         }
         uDPServerHandler.dealAllCdz();
-		//timer.schedule(new ServerState(), 10000, keepaliveTimer);
+		timer.schedule(new ServerState(), 10000, keepaliveTimer);
 	}
 	
 	public class ServerState extends TimerTask{
