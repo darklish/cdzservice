@@ -48,10 +48,7 @@ public class UDPMineServer {
 	@Resource
 	private UDPServerHandler uDPServerHandler;
 	
-	
-	
 	private Timer timer;
-	
 	
 	private int keepaliveTimer = 60000;//服务端定时发送心跳广播信息,毫秒
 	/**

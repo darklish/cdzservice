@@ -637,7 +637,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 	public void onLineDevicee(String cdzNo) {
 		List<CdzInfo> infoList = cdzInfoService.getCdzByNo(cdzNo);
 		if (infoList == null || infoList.size() == 0 || infoList.size() > 1) {
-			logger.error("接收到设备处理消息，设备在线，未找到对应设备错误:cdzno:{}", cdzNo);
+			logger.error("接收到设备消息，设备在线，未找到对应设备错误:cdzno:{}", cdzNo);
 			return;
 		}
 		CdzInfo cInfo = infoList.get(0);

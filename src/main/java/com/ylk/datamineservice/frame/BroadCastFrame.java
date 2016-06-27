@@ -6,7 +6,7 @@ package com.ylk.datamineservice.frame;
  */
 public class BroadCastFrame {
 	protected int pHead = 0x88;
-	protected int pid = 0x10;
+	protected int pid = 0x0a;
 	protected int  serverNo = 0xF1;
 	protected int moduleNo;
 	protected int deviceNo = 0x53;

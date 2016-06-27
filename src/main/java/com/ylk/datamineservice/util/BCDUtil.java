@@ -92,7 +92,7 @@ public class BCDUtil {
      * @param src 源字节数组
      * @return 16进制字符串
      */
-    public static String bytesToHexString(byte[] src){  
+    public static String bytesToHexString(byte[] src){
         StringBuilder stringBuilder = new StringBuilder("");  
         if (src == null || src.length <= 0) {
             return null;  

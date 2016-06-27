@@ -28,7 +28,6 @@ public class ClientTool {
 
     public ClientTool(int port) {
     	
-    	
         this.port = port;
     }
 

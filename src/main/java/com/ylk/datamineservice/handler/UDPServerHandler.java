@@ -101,7 +101,6 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 	protected void channelRead0(ChannelHandlerContext ctx, BaseFrame out)
 			throws Exception {
 		//消息类型,心跳;故障;获取卡号;卡号、密码校验;充电量上传;故障锁卡后激活
-
 		String cdzNo = out.getCdzNo();
 		if (logger.isDebugEnabled()) {
 			logger.debug("接受到设备 心跳消息,cdzNo:{}", cdzNo);
@@ -110,14 +109,12 @@ public class UDPServerHandler extends SimpleChannelInboundHandler<BaseFrame> {
 		messageService.getEventbus().post(new CommonFrameEvent(cdzNo));
 		offLineLock.readLock().lock();
 		DeviceKeepAliveTask oldTask = deviceMap.get(cdzNo);
-		
 		if (oldTask != null) {
 			oldTask.cancel();
 			DeviceKeepAliveTask task = new DeviceKeepAliveTask(cdzNo);
 			timer.schedule(task, deviceOfflineTimeOut);
 			deviceMap.put(cdzNo, task);
-		}
-		else {
+		} else {
 			DeviceKeepAliveTask task = new DeviceKeepAliveTask(cdzNo);
 			timer.schedule(task, deviceOfflineTimeOut);
 			deviceMap.put(cdzNo, task);
