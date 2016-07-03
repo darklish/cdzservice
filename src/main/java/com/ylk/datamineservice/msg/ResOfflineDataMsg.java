@@ -23,7 +23,7 @@ public class ResOfflineDataMsg extends ResBaseMsg {
 		dataBuf.put((byte)uploadCode);
 		dataBuf.putFloat(balance);
 		dataBuf.flip();
-		this.fType = 0x45;
+		this.fType = 0x46;
 		
 	}
 
