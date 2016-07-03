@@ -74,7 +74,7 @@ public class ClientTool {
         
         //请求充电开始
         bb.writeBytes(BCDUtil.hexStringToBytes("88"));
-        bb.writeBytes(BCDUtil.hexStringToBytes("10"));
+        bb.writeBytes(BCDUtil.hexStringToBytes("0a"));
         bb.writeBytes(BCDUtil.hexStringToBytes("02"));
         bb.writeBytes(BCDUtil.hexStringToBytes("F0"));
         bb.writeBytes(BCDUtil.hexStringToBytes("21"));
@@ -88,7 +88,7 @@ public class ClientTool {
         
 		
         bb.writeBytes(BCDUtil.hexStringToBytes("88"));
-        bb.writeBytes(BCDUtil.hexStringToBytes("10"));
+        bb.writeBytes(BCDUtil.hexStringToBytes("0a"));
         bb.writeBytes(BCDUtil.hexStringToBytes("02"));
         bb.writeBytes(BCDUtil.hexStringToBytes("F0"));
         bb.writeBytes(BCDUtil.hexStringToBytes("21"));
@@ -101,7 +101,7 @@ public class ClientTool {
         bb.writeByte(bb3[1]);
         bb.writeByte(bb3[2]);
         bb.writeBytes(BCDUtil.hexStringToBytes("88"));
-        bb.writeBytes(BCDUtil.hexStringToBytes("10"));
+        bb.writeBytes(BCDUtil.hexStringToBytes("0a"));
         bb.writeBytes(BCDUtil.hexStringToBytes("02"));
         bb.writeBytes(BCDUtil.hexStringToBytes("F0"));
         bb.writeBytes(BCDUtil.hexStringToBytes("21"));

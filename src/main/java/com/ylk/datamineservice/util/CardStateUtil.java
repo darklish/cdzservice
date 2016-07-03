@@ -12,6 +12,8 @@ public class CardStateUtil {
 	
 	public static final int CARD_LOSS = 0xf3;
 	
+	public static final int CARD_USING = 0xf4;
+	
 	public static final int RESERVE = 0;
 	
 	public static final int DB_CARD_STATE_UNINIT = 0;//未出售

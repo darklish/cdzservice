@@ -45,7 +45,7 @@ public class ClientBenchTest {
         ByteBuf bb = Unpooled.buffer();
         //卡号验证请求
         bb.writeBytes(BCDUtil.hexStringToBytes("88"));
-        bb.writeBytes(BCDUtil.hexStringToBytes("0A"));
+        bb.writeByte(0x0A);
         bb.writeBytes(BCDUtil.hexStringToBytes("01"));
         bb.writeBytes(BCDUtil.hexStringToBytes("F0"));
         bb.writeBytes(BCDUtil.hexStringToBytes("01"));
@@ -57,7 +57,7 @@ public class ClientBenchTest {
         bb.writeByte(bb2[1]);
 		
         bb.writeBytes(BCDUtil.hexStringToBytes("88"));
-        bb.writeBytes(BCDUtil.hexStringToBytes("0A"));
+        bb.writeByte(0x0A);
         bb.writeBytes(BCDUtil.hexStringToBytes("01"));
         bb.writeBytes(BCDUtil.hexStringToBytes("F0"));
         bb.writeBytes(BCDUtil.hexStringToBytes("01"));

@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ylk.datamineservice.mapper.ChargeLogMapper;
 import com.ylk.datamineservice.mapper.StreamInfoMapper;
 import com.ylk.datamineservice.model.AreaInfo;
 import com.ylk.datamineservice.model.AreaInfoExample;
@@ -69,6 +71,9 @@ public class BusinessComServiceImpl implements BusinessComService {
 
 	@Resource
 	private StreamInfoMapper streamInfoMapper;
+	
+	@Resource
+	private ChargeLogMapper chargeLogMapper;
 
 	public ResOfflineDataMsg offLineDataUpload(ReqOfflineDataMsg msg) {
 		Date endTime = new Date();
@@ -400,7 +405,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 			if (msg.getChargeConfig() == ChargeTypeUtil.FIX_TIME) {
 				int timeLong = msg.getChargeData();
 				logger.info("充电开始固定时间充电,卡号:{},余额:{},当前单价:{},充电时长:{}分钟,开始充电!", cardInfo.getCardno(), cardInfo.getMoney(),
-						areaInfo.getElectricityprice());
+						areaInfo.getElectricityprice(), timeLong);
 				chargeLog.setChargeTime(timeLong);
 				chargeLog.setChargeType(ChargeTypeUtil.DB_FIX_TIME);
 				retMsg.setChargeCode(ChargeUtil.CHARGE_ALLOW);
@@ -412,11 +417,11 @@ public class BusinessComServiceImpl implements BusinessComService {
 				chargeLog.setChargeType(ChargeTypeUtil.DB_FIX_MONEY);
 				if (cardInfo.getMoney() < msg.getChargeData()) {
 					logger.info("充电开始固定金额充电,卡号:{},余额:{},充电金额:{} 余额不足!", cardInfo.getCardno(), cardInfo.getMoney(),
-							msg.getChargeData() * 100);
+							msg.getChargeData() / 100);
 					retMsg.setChargeCode(ChargeUtil.CHARGE_FORBID_NOT_FUNDS);
 				} else {
 					logger.info("充电开始固定金额充电,卡号:{},余额:{},充电金额:{} 开始充电!", cardInfo.getCardno(), cardInfo.getMoney(),
-							msg.getChargeData() * 100);
+							msg.getChargeData() / 100);
 					retMsg.setChargeCode(ChargeUtil.CHARGE_ALLOW);
 				}
 			}
@@ -442,7 +447,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 				cardInfoService.updateCardInfo(cardInfo);
 				chargeLog.setCreateDate(new Date());
 				chargeLog.setBeginTime(new Date());
-				if (msg.getGunType() == 0x0A) {
+				if (msg.getGunType() == 0x0a) {
 					chargeLog.setGunType("A");
 				} else {
 					chargeLog.setGunType("B");
@@ -452,10 +457,12 @@ public class BusinessComServiceImpl implements BusinessComService {
 				chargeLog.setCardNo(Integer.valueOf(cardInfo.getCardno()));
 				chargeLog.setCdzId(Integer.valueOf(msg.getCdzNo()));
 				chargeLog.setBeginMeterQua(msg.getMeterQua());
-				chargeLogService.saveLog(chargeLog);
+				logger.info("begin insert charge log");
+				chargeLogMapper.insert(chargeLog);
+				logger.info("end insert charge log");
 			}
 		} catch (Exception e) {
-			logger.error("开始充电错误" + e);
+			logger.error("开始充电错误", e);
 			retMsg.setChargeCode(ChargeUtil.CHARGE_FORBID_CON_ERR);
 			return retMsg;
 		}
@@ -504,7 +511,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 			retMsg.setCardState(CardStateUtil.CARD_FROZEN);
 			return retMsg;
 		} else if (cardInfo.getState() == CardStateUtil.DB_CARD_STATE_CHARGE) {
-			retMsg.setCardState(CardStateUtil.CARD_FROZEN);
+			retMsg.setCardState(CardStateUtil.CARD_USING);
 			return retMsg;
 		} else if (cardInfo.getState() == CardStateUtil.DB_CARD_STATE_LOSS) {
 			retMsg.setCardState(CardStateUtil.CARD_LOSS);
@@ -544,6 +551,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 			retMsg.setFrozenCode(FrozenUtil.FROZEN_ALLOW);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("frozenIc error", e);
 		}
 
 		return retMsg;

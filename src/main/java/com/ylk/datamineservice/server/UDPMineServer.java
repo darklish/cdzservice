@@ -78,7 +78,7 @@ public class UDPMineServer {
         }catch(Exception e){
         	logger.error("启动UDP Server失败",e);
         }
-        uDPServerHandler.dealAllCdz();
+        //uDPServerHandler.dealAllCdz();
 		timer.schedule(new ServerState(), 10000, keepaliveTimer);
 	}
 	

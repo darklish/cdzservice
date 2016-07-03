@@ -1,5 +1,8 @@
 package com.ylk.datamineservice.client;
 
+import com.ylk.datamineservice.util.BCDUtil;
+import com.ylk.datamineservice.util.ByteUtil;
+
 public class Test {  
       
     /** 
@@ -7,6 +10,7 @@ public class Test {
      * @参数: 参数 
      */  
     public static void main(String[] args) {
+    	System.out.println(0x0a);
     	int b = 0xE5;
     	System.out.println(b>>>5);
     	System.out.println(b & 31);
