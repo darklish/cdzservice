@@ -105,7 +105,7 @@ public class BusinessComServiceImpl implements BusinessComService {
 		// 根据单价信息，消耗电量信息，卡信息判断是否是有效
 
 		if (qua < 0) {
-			logger.error("离线数据上传,消耗电量为负，锁定卡,cardNo:{},gunType:{},开始电量:{},结束电量:{}", msg.getCardNo(), msg.getStrGunType(),
+			logger.error("离线数据上传,消耗电量为负，暂时锁定卡,cardNo:{},gunType:{},开始电量:{},结束电量:{}", msg.getCardNo(), msg.getStrGunType(),
 					startChargeLog.getBeginMeterQua(), msg.getMeterQua());
 		}
 		int consumFen = (int) Math.ceil(areaInfo.getElectricityprice() * qua / 100d);
